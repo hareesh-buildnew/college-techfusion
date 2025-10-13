@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vedam TechFusion 2025</title>
+
+  <style>
+    /* ------------------- General ------------------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #d014c7, #8a48cd);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ------------------- Navbar ------------------- */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 60px;
+      height: 90px;
+      background: linear-gradient(120deg,rgb(49, 32, 141), rgb(22, 103, 232));
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+      box-shadow: 0 0 30px rgba(0,255,255,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-area img {
+      height: 55px;
+      width: 55px;
+      border-radius: 50%;
+      border: 2px solid rgba(0,255,255,0.4);
+      box-shadow: 0 0 10px rgba(0,255,255,0.4);
+    }
+
+    .logo-text {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(45deg, #00FFF0, #0070FF, #FF00C8);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 8px rgba(0,255,255,0.4);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #00FFF0, #FF00C8);
+      transition: width 0.4s ease;
+      border-radius: 2px;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover {
+      color: #00FFF0;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border: none;
+      outline: none;
+      color: #fff;
+      cursor: pointer;
+      position: relative;
+      z-index: 0;
+      border-radius: 10px;
+      background: #111;
+      font-size: 16px;
+      font-weight: 600;
+      transition: background 0.4s, box-shadow 0.4s, transform 0.2s;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      background-size: 400%;
+      z-index: -1;
+      width: calc(100% + 4px);
+      height: calc(100% + 4px);
+      filter: blur(8px);
+      border-radius: 10px;
+      opacity: 0.6;
+      animation: glowing 20s linear infinite;
+    }
+
+    @keyframes glowing {
+      0% { background-position: 0 0; }
+      50% { background-position: 400% 0; }
+      100% { background-position: 0 0; }
+    }
+
+    .btn:hover {
+      background: linear-gradient(45deg, #FF0000, #FF7300, #FFFB00, #00FFD5);
+      box-shadow: 0 0 25px rgba(255,255,255,0.4);
+      transform: translateY(-2px);
+    }
+
+    .right-buttons {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    /* Mobile Menu Toggle - CSS Only */
+    #menu-toggle {
+      display: none;
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    .mobile-menu-toggle span {
+      width: 30px;
+      height: 3px;
+      background: #00FFF0;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ------------------- Hero Section ------------------- */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(120deg, rgba(0,0,0,0.9), rgba(0,15,40,0.9));
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.3;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(0,0,50,0.5));
+      mix-blend-mode: overlay;
+    }
+
+    .hero-content {
+      position: relative;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-size: 90px;
+      margin-bottom: 20px;
+      color: #00FFF0;
+      text-shadow: 0 0 30px #00FFF0, 0 0 60px #FF00C8;
+    }
+
+    .hero p {
+      font-size: 28px;
+      color: #fff;
+      margin-bottom: 30px;
+    }
+
+    .date-box {
+      display: inline-block;
+      background: rgba(0,255,255,0.2);
+      padding: 20px 50px;
+      border: 2px solid #00FFF0;
+      border-radius: 10px;
+      font-size: 24px;
+      margin-bottom: 40px;
+    }
+
+    .register-btn {
+      display: inline-block;
+      padding: 18px 50px;
+      background: linear-gradient(90deg, #00FFF0, #FF00C8);
+      color: #0a0e1a;
+      text-decoration: none;
+      font-size: 22px;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: all 0.4s;
+    }
+
+    .register-btn:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 0 30px rgba(0,255,255,0.6);
+    }
+
+    /* ------------------- Events Section ------------------- */
+    .events {
+      padding: 100px 60px;
+      background: linear-gradient(180deg, #0a0e1a, #1a1420);
+    }
+
+    .events h2 {
+      text-align: center;
+      font-size: 50px;
+      margin-bottom: 60px;
+      color: #00FFF0;
+      text-shadow: 0 0 20px #00FFF0;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .event-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 2px solid #00FFF0;
+      transition: all 0.5s;
+    }
+
+    .event-card:hover {
+      transform: translateY(-15px) scale(1.03);
+      border-color: #FF00C8;
+      box-shadow: 0 20px 60px rgba(255, 0, 200, 0.4);
+    }
+
+    .event-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: all 0.5s;
+    }
+
+    .event-info {
+      padding: 30px;
+    }
+
+    .event-info h3 {
+      font-size: 26px;
+      margin-bottom: 15px;
+      color: #00FFF0;
+    }
+
+    .event-info p {
+      color: #ccc;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .event-btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background: #FF00C8;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 25px;
+      transition: all 0.3s;
+    }
+
+    .event-btn:hover {
+      background: #00FFF0;
+      color: #0a0e1a;
+    }
+
+    /* ------------------- Gallery Section ------------------- */
+    .gallery {
+      padding: 100px 60px;
+      background: linear-gradient(180deg, #1a1420, #0a0e1a);
+    }
+
+    .gallery h2 {
+      text-align: center;
+      font-size: 50px;
+      margin-bottom: 60px;
+      color: #00FFF0;
+      text-shadow: 0 0 20px #00FFF0;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      border: 2px solid rgba(0, 255, 255, 0.3);
+      transition: all 0.4s;
+      aspect-ratio: 1;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.05);
+      border-color: #FF00C8;
+      box-shadow: 0 10px 40px rgba(255, 0, 200, 0.5);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.4s;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8));
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-caption {
+      color: #00FFF0;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    /* ------------------- Footer ------------------- */
+    footer {
+      padding: 60px;
+      background: #050810;
+      text-align: center;
+      border-top: 3px solid #00FFF0;
+    }
+
+    footer h3 {
+      font-size: 32px;
+      margin-bottom: 20px;
+      color: #00FFF0;
+    }
+
+    footer p {
+      color: #ccc;
+      margin-bottom: 30px;
+      font-size: 18px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .social-links a {
+      width: 60px;
+      height: 60px;
+      background: #FF00C8;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      text-decoration: none;
+      font-size: 24px;
+      transition: all 0.4s;
+    }
+
+    .social-links a:hover {
+      background: #00FFF0;
+      transform: translateY(-10px) rotate(360deg);
+      box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
+    }
+
+    /* ------------------- Media Queries ------------------- */
+
+    /* Tablet (768px - 1024px) */
+    @media (max-width: 1024px) {
+      nav {
+        padding: 18px 40px;
+      }
+
+      .logo-text {
+        font-size: 1.6rem;
+      }
+
+      .nav-links {
+        gap: 20px;
+      }
+
+      .hero h1 {
+        font-size: 70px;
+      }
+
+      .hero p {
+        font-size: 24px;
+      }
+
+      .date-box {
+        font-size: 20px;
+        padding: 15px 35px;
+      }
+
+      .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* Mobile (max-width: 768px) */
+    @media (max-width: 768px) {
+      nav {
+        padding: 15px 20px;
+        height: auto;
+        flex-wrap: wrap;
+      }
+
+      .logo-area {
+        order: 1;
+      }
+
+      .logo-area img {
+        height: 45px;
+        width: 45px;
+      }
+
+      .logo-text {
+        font-size: 1.3rem;
+      }
+
+      .nav-links {
+        order: 4;
+        width: 100%;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px 0;
+        text-align: center;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      #menu-toggle:checked ~ .nav-links {
+        max-height: 500px;
+      }
+
+      .mobile-menu-toggle {
+        display: flex;
+        order: 3;
+      }
+
+      #menu-toggle:checked ~ .mobile-menu-toggle span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+      }
+
+      #menu-toggle:checked ~ .mobile-menu-toggle span:nth-child(2) {
+        opacity: 0;
+      }
+
+      #menu-toggle:checked ~ .mobile-menu-toggle span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+      }
+
+      .right-buttons {
+        gap: 10px;
+        order: 2;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+
+      .hero {
+        height: auto;
+        min-height: 100vh;
+        padding: 80px 20px 60px;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+      }
+
+      .hero p {
+        font-size: 20px;
+      }
+
+      .date-box {
+        font-size: 16px;
+        padding: 12px 25px;
+      }
+
+      .register-btn {
+        padding: 14px 35px;
+        font-size: 18px;
+      }
+
+      .events {
+        padding: 60px 20px;
+      }
+
+      .events h2 {
+        font-size: 36px;
+        margin-bottom: 40px;
+      }
+
+      .events-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .event-card:hover {
+        transform: translateY(-10px) scale(1.02);
+      }
+
+      .gallery {
+        padding: 60px 20px;
+      }
+
+      .gallery h2 {
+        font-size: 36px;
+        margin-bottom: 40px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+
+      footer {
+        padding: 40px 20px;
+      }
+
+      footer h3 {
+        font-size: 26px;
+      }
+
+      footer p {
+        font-size: 16px;
+      }
+
+      .social-links {
+        gap: 20px;
+      }
+
+      .social-links a {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+    }
+
+    /* Small Mobile (max-width: 480px) */
+    @media (max-width: 480px) {
+      .logo-text {
+        font-size: 1.1rem;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+
+      .date-box {
+        font-size: 14px;
+        padding: 10px 20px;
+      }
+
+      .register-btn {
+        padding: 12px 30px;
+        font-size: 16px;
+      }
+
+      .events h2,
+      .gallery h2 {
+        font-size: 30px;
+      }
+
+      .event-info {
+        padding: 20px;
+      }
+
+      .event-info h3 {
+        font-size: 22px;
+      }
+
+      .event-info p {
+        font-size: 14px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .right-buttons {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo-area">
+      <img src="./favicon (1).ico" alt="Vedam Logo">
+      <div class="logo-text">Vedam TechFusion</div>
+    </div>
+
+    <input type="checkbox" id="menu-toggle">
+    
+    <label for="menu-toggle" class="mobile-menu-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#events">Events</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <div class="right-buttons">
+      <button class="btn">Register</button>
+      <button class="btn">Login</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <video class="hero-video" autoplay muted loop>
+      <source src="./robvid.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>TechFusion 2025</h1>
+      <p>Where Innovation Meets Imagination</p>
+      <div class="date-box">November 15–17, 2025 | Virtual & On-Campus</div><br>
+      <a href="#" class="register-btn">Register Now →</a>
+    </div>
+  </section>
+
+  <!-- Events Section -->
+  <section class="events" id="events">
+    <h2>Featured Events</h2>
+    <div class="events-grid">
+      <div class="event-card">
+        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=500" alt="AI Workshop" class="event-image">
+        <div class="event-info">
+          <h3>AI & Machine Learning</h3>
+          <p>Dive deep into artificial intelligence and build your own ML models with industry experts.</p>
+          <a href="#" class="event-btn">Learn More</a>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500" alt="Hackathon" class="event-image">
+        <div class="event-info">
+          <h3>24-Hour Hackathon</h3>
+          <p>Code, create, and compete! Win exciting prizes and showcase your innovative solutions.</p>
+          <a href="#" class="event-btn">Learn More</a>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?w=500" alt="Robotics" class="event-image">
+        <div class="event-info">
+          <h3>Robotics Challenge</h3>
+          <p>Build autonomous robots and participate in thrilling competitions and demonstrations.</p>
+          <a href="#" class="event-btn">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="gallery" id="gallery">
+    <h2>Event Gallery</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400" alt="Tech Event">
+        <div class="gallery-overlay">
+          <div class="gallery-caption">Workshop 2024</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=400" alt="Coding">
+        <div class="gallery-overlay">
+          <div class="gallery-caption">Hackathon Finals</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400" alt="Team">
+        <div class="gallery-overlay">
+          <div class="gallery-caption">Team Collaboration</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400" alt="Presentation">
+        <div class="gallery-overlay">
+          <div class="gallery-caption">Project Showcase</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400" alt="Innovation">
+        <div class="gallery-overlay">
+          <div class="gallery-caption">Innovation Lab</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400" alt="Tech Setup">
+        <div class="gallery-overlay">
+          <div class="gallery-caption">Tech Arena</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400" alt="Keynote">
+        <div class="gallery-overlay">
+          <div class="gallery-caption">Keynote Session</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400" alt="Awards">
+        <div class="gallery-overlay">
+          <div class="gallery-caption">Awards Ceremony</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <h3>Join the Innovation Revolution</h3>
+    <p>Follow us on social media for updates and announcements</p>
+    <div class="social-links">
+      <a href="#">f</a>
+      <a href="#">t</a>
+      <a href="#">in</a>
+      <a href="#">ig</a>
+    </div>
+    <p style="margin-top: 40px; color: #666;">© 2025 TechFusion. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
